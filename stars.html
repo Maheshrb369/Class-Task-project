@@ -4,54 +4,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Pattern</title>
+    <title>Task A & Task B</title>
     <style>
         body {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
             font-family: Arial, sans-serif;
             margin-top: 50px;
+            padding: 0 20px;
+        }
+
+        .task {
+            width: 45%;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         input {
             padding: 8px;
             font-size: 16px;
+            margin: 5px 0;
         }
 
         button {
             padding: 10px 15px;
             font-size: 16px;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
-        #output {
+        .output {
             margin-top: 20px;
             font-size: 18px;
             font-family: monospace;
             text-align: left;
             white-space: pre-line;
         }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Generate Stars</h1>
-    <input type="number" id="input" placeholder="Enter a positive number">
-    <button onclick="printStars()">Generate</button>
 
-    <div id="output"></div>
+    <!-- Task A: Star Pattern -->
+    <div class="task">
+        <h2>Task - A</h2>
+        <h1>Generate Stars</h1>
+        <input type="number" id="starInput" placeholder="Enter a positive number">
+        <button onclick="printStars()">Generate</button>
+        <div id="starOutput" class="output"></div>
+    </div>
+
+    <!-- Task B: Add Two Numbers -->
+    <div class="task">
+        <h2>Task - B</h2>
+        <h1>Add Two Numbers</h1>
+        <input type="number" id="numA" placeholder="Enter number A">
+        <input type="number" id="numB" placeholder="Enter number B">
+        <button onclick="sum()">Calculate Sum</button>
+        <div id="sumOutput" class="output">The sum is: </div>
+    </div>
 
     <script>
+        // Task A: Star Pattern
         function getRandomColor() {
             return '#' + Math.floor(Math.random() * 16777215).toString(16);
         }
 
         function printStars() {
-            let n = document.getElementById("input").value;
-            let outputDiv = document.getElementById("output");
+            let n = document.getElementById("starInput").value;
+            let outputDiv = document.getElementById("starOutput");
             outputDiv.innerHTML = "";
 
             if (n <= 0 || isNaN(n)) {
@@ -70,7 +104,29 @@
                 outputDiv.appendChild(row);
             }
         }
+
+        // Task B: Add Two Numbers
+        function sum() {
+            let a = parseInt(document.getElementById("numA").value);
+            let b = parseInt(document.getElementById("numB").value);
+
+            if (isNaN(a) || isNaN(b)) {
+                document.getElementById("sumOutput").innerHTML = "Please enter valid numbers.";
+                return;
+            }
+
+            let total = 0;
+            let i = a;
+            while (i <= b) {
+                total += i;
+                i++;
+            }
+
+            document.getElementById("sumOutput").innerHTML = "The sum is: " + total;
+            document.getElementById("sumOutput").style.color = "green";
+        }
     </script>
+
 </body>
 
 </html>

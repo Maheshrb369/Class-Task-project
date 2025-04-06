@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Company Portal</title>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
@@ -134,10 +134,8 @@
         .bu-img-bottom {
             width: 50px;
             height: 50px;
-
         }
 
-        /* Mobile-Specific Footer Styles */
         @media (max-width: 768px) {
             footer {
                 display: flex;
@@ -174,7 +172,6 @@
             }
         }
 
-        /* Mobile-Specific Styles */
         @media (max-width: 768px) {
             #menuButton {
                 display: block;
@@ -208,16 +205,7 @@
 
     <div class="container">
         <div class="buttons" id="dropdownMenu">
-            <button onclick="loadTask('basic.html')">Task 1</button>
-            <button onclick="loadTask('hover.html')">Task 2</button>
-            <button onclick="loadTask('alert.html')">Task 3</button>
-            <button onclick="loadTask('stars.html')">Task 4</button>
-            <button onclick="loadTask('calculator.html')">Task 5</button>
-            <button onclick="loadTask('normal-grade.html')">Task 6</button>
-            <button onclick="loadTask('grade.html')">Task 7</button>
-            <button onclick="loadTask('student_info.html')">Task 8</button>
-            <button onclick="loadTask('form.html')">Task 9</button>
-            <button onclick="loadTask('page-change-color.html')">Task 10</button>
+            <!-- Buttons will be injected here from JSON -->
         </div>
 
         <div class="content">
@@ -227,20 +215,17 @@
 
     <footer>
         <div class="bu-button">
-
             <div class="bu-bottom" style="margin-left: 30px;">
                 <a href="https://twitter.com" target="_blank" class="bu-bottom" style="text-decoration: none;">
                     <button>Twitter</button>
-                    <img class=" bu-img-bottom" src="./resources/twitter.png" alt="Twitter img">
+                    <img class="bu-img-bottom" src="./resources/twitter.png" alt="Twitter img">
                 </a>
-
             </div>
             <div class="bu-bottom" style="margin-left: 30px;">
                 <a href="https://instagram.com" target="_blank" class="bu-bottom" style="text-decoration: none;">
                     <button>Instagram</button>
-                    <img class=" bu-img-bottom" src="./resources/instagram.png" alt="Instagram img">
+                    <img class="bu-img-bottom" src="./resources/instagram.png" alt="Instagram img">
                 </a>
-
             </div>
             <div class="bu-bottom" style="margin-left: 30px;">
                 <a href="https://linkedin.com" target="_blank" class="bu-bottom" style="text-decoration: none;">
@@ -250,21 +235,41 @@
             </div>
             <div style="margin-left: 30px;">
                 <p>© 2025 BMR. All rights reserved.</p>
-
             </div>
-
         </div>
     </footer>
 
     <script>
-        document.getElementById("menuButton").addEventListener("click", () => {
-            document.getElementById("dropdownMenu").classList.toggle("show");
+        const tasks = [
+            { title: "Task 1", file: "basic.html" },
+            { title: "Task 2", file: "hover.html" },
+            { title: "Task 3", file: "alert.html" },
+            { title: "Task 4", file: "stars.html" },
+            { title: "Task 5", file: "calculator.html" },
+            { title: "Task 6", file: "normal-grade.html" },
+            { title: "Task 7", file: "grade.html" },
+            { title: "Task 8", file: "student_info.html" },
+            { title: "Task 9", file: "form.html" },
+            { title: "Task 10", file: "page-change-color.html" }
+        ];
+
+        const menuContainer = document.getElementById("dropdownMenu");
+        const iframe = document.getElementById("contentFrame");
+
+        // Load buttons from the tasks JSON
+        tasks.forEach(task => {
+            const btn = document.createElement("button");
+            btn.textContent = task.title;
+            btn.onclick = () => {
+                iframe.src = task.file;
+                menuContainer.classList.remove("show");
+            };
+            menuContainer.appendChild(btn);
         });
 
-        function loadTask(taskPage) {
-            document.getElementById("contentFrame").src = taskPage;
-            document.getElementById("dropdownMenu").classList.remove("show");
-        }
+        document.getElementById("menuButton").addEventListener("click", () => {
+            menuContainer.classList.toggle("show");
+        });
     </script>
 </body>
 
